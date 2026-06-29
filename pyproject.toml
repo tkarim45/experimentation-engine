@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "experimentation-engine"
+version = "0.1.0"
+description = "A/B testing engine: frequentist + Bayesian + CUPED variance reduction + peeking-safe sequential testing"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Taimour Abdul Karim", email = "taimour.a.karim@gmail.com" }]
+keywords = ["ab-testing", "experimentation", "causal-inference", "bayesian", "cuped", "statistics"]
+dependencies = ["numpy>=1.24", "scipy>=1.10"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+abtest = "abtest.analyze:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/abtest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
