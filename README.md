@@ -5,7 +5,7 @@ things teams actually get wrong: undersized tests, p-value tunnel vision, throwi
 power, and peeking at results until they look significant.
 
 One command runs the whole analysis over a simulated experiment with a **known ground-truth
-effect** — so every method is validated, not just asserted.
+effect**, so every method is validated, not just asserted.
 
 ```bash
 abtest                 # full report
@@ -17,9 +17,9 @@ abtest --n 20000 --rel-lift 0.05 --seed 1
 
 | Module | Question it answers |
 |---|---|
-| `frequentist` | Two-proportion z-test, Welch t-test, **required sample size** & **achieved power** for an MDE — *"is the lift real, and was the test even powered to see it?"* |
-| `bayesian` | Beta-Binomial posteriors → **P(treatment > control)** and **expected loss** of each decision — *"what's the probability B wins, and how much could shipping it cost me?"* |
-| `cuped` | **CUPED** variance reduction using a pre-experiment covariate — same unbiased effect, tighter CI, more power for free |
+| `frequentist` | Two-proportion z-test, Welch t-test, **required sample size** & **achieved power** for an MDE, *"is the lift real, and was the test even powered to see it?"* |
+| `bayesian` | Beta-Binomial posteriors → **P(treatment > control)** and **expected loss** of each decision, *"what's the probability B wins, and how much could shipping it cost me?"* |
+| `cuped` | **CUPED** variance reduction using a pre-experiment covariate, same unbiased effect, tighter CI, more power for free |
 | `sequential` | **mSPRT always-valid p-value** + a peeking simulation proving naive repeated peeking inflates false positives while always-valid does not |
 
 ## Measured results
@@ -37,10 +37,10 @@ PEEKING      naive repeated-peeking FP rate 21.3%  vs  always-valid 1.0%   (targ
 Three findings worth their own line:
 
 - **Peeking is not a rounding error.** Checking a fixed-horizon test at 10 interim looks drives
-  the false-positive rate to **21.3%** on null data — 4× the nominal 5%. The mSPRT always-valid
+  the false-positive rate to **21.3%** on null data, 4× the nominal 5%. The mSPRT always-valid
   p-value holds at **1.0%**. This is the single most common way teams ship nothing as something.
 - **CUPED cut variance 51%** here (covariate ρ≈0.7). That CI shrink is equivalent to roughly
-  *doubling* the sample size — at zero extra traffic cost.
+  *doubling* the sample size, at zero extra traffic cost.
 - **The "significant" test was underpowered** (power 0.44 at the realized n). The engine flags
   this explicitly: a significant p-value from an underpowered test is a coin flip you got lucky on.
 
@@ -60,7 +60,7 @@ pytest -q          # 8 passed
 
 ## Stack
 
-Pure NumPy + SciPy — no black-box stats library. Two-proportion z, Welch t, power/sample-size,
+Pure NumPy + SciPy, no black-box stats library. Two-proportion z, Welch t, power/sample-size,
 Beta-Binomial Monte-Carlo posteriors, CUPED, and mSPRT all implemented from the formulas.
 
 ## License
