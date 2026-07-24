@@ -13,6 +13,13 @@ abtest --json          # machine-readable
 abtest --n 20000 --rel-lift 0.05 --seed 1
 ```
 
+
+## Architecture
+
+![architecture](docs/assets/architecture.png)
+
+*Interactive/exportable version: [`docs/assets/architecture.html`](docs/assets/architecture.html).*
+
 ## What it does
 
 | Module | Question it answers |
